@@ -676,10 +676,10 @@ piC=0
 
 nicheshift=5 # This is the Delta (how incomplete is inheritance). Change it to 5 or 30 to reproduce strong and weak evolution
 
-sigma=0.05 # This is the sigma of interactions. Change it between [0.01,0.2] to reproduce results
+sigma=0.2 # This is the sigma of interactions. Change it between [0.01,0.2] to reproduce results
 
 
-costLevel=5 # the costs we used range from level 1 to 6
+costLevel=2 # the costs we used range from level 1 to 6
 cost=costLevel*0.5*0.01 # This is the lambda (harvesting cost). Change it between [0.005,0.03] to reproduce results, but better to change by levels instead
 
 
@@ -738,7 +738,7 @@ if(isTest==1):
         
         
     # save results
-    path = dir_path+'/data/analysisData_1/'+str(num_sample)+'FEVO-O1.pkl' # Change this path to where you want to save the simulation
+    path = dir_path+'/data/testData_1/'+str(num_sample)+'FEVO-O1.pkl' # Change this path to where you want to save the simulation
     
     with open(path, 'wb') as file:
           

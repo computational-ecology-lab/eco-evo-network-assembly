@@ -135,9 +135,9 @@ tvec = [1,50,100,150,200,250,300,350,400,450,499] # this list chooses the assemb
 
 
 if(isTest==1): # Parameters for custom simulations
-    folder = 'analysis_df_1/' # Choose this folder as the one where you stored the df's
-    filecodes = [[0,0],[1,0],[2,0],[3,0]] # The second value is always 0, choose the first to match the kind of your df's and the quantity of entries 
-    num_samples=20 # Number of samples in each df (should be the all same, but this is only for calculating standard errors)
+    folder = 'test' # Choose this folder as the one where you stored the df's
+    filecodes = [[0,0]] # The second value is always 0, choose the first to match the kind of your df's and the quantity of entries 
+    num_samples=2 # Number of samples in each df (should be the all same, but this is only for calculating standard errors)
 
 if(isHeatmap==0 and isTest==0):
 
@@ -239,29 +239,41 @@ if(isHeatmap==1 and isTest==0):
     mean_df = hdf.groupby(['sigma', 'cost']).mean().reset_index()
     
     value = 'propM'
-    sns.heatmap(mean_df.pivot('sigma','cost',str(value)+'499')).invert_yaxis()
+    sns.heatmap(mean_df.pivot(index='sigma', columns='cost', values=str(value)+'499')).invert_yaxis()
     plt.title('Proportion of mutualism')
+    plt.savefig('propM.png', dpi=300, bbox_inches='tight')
     plt.show()
+    
     value = 'propP'
-    sns.heatmap(mean_df.pivot('sigma','cost',str(value)+'499')).invert_yaxis()
+    sns.heatmap(mean_df.pivot(index='sigma', columns='cost', values=str(value)+'499')).invert_yaxis()
     plt.title('Proportion of consumer-resource')
+    plt.savefig('propP.png', dpi=300, bbox_inches='tight')
     plt.show()
+    
     value = 'propC'
-    sns.heatmap(mean_df.pivot('sigma','cost',str(value)+'499')).invert_yaxis()
+    sns.heatmap(mean_df.pivot(index='sigma', columns='cost', values=str(value)+'499')).invert_yaxis()
     plt.title('Proportion of competition')
+    plt.savefig('propC.png', dpi=300, bbox_inches='tight')
     plt.show()
+    
     value = 'Con'
-    sns.heatmap(mean_df.pivot('sigma','cost',str(value)+'499')).invert_yaxis()
+    sns.heatmap(mean_df.pivot(index='sigma', columns='cost', values=str(value)+'499')).invert_yaxis()
     plt.title('Connectance')
+    plt.savefig('connectance.png', dpi=300, bbox_inches='tight')
     plt.show()
+    
     value = 'n_species'
-    sns.heatmap(mean_df.pivot('sigma','cost',str(value)+'499')).invert_yaxis()
+    sns.heatmap(mean_df.pivot(index='sigma', columns='cost', values=str(value)+'499')).invert_yaxis()
     plt.title('Species richness')
+    plt.savefig('richness.png', dpi=300, bbox_inches='tight')
     plt.show()
+    
     value = 'Complexity'
-    sns.heatmap(mean_df.pivot('sigma','cost',str(value)+'499')).invert_yaxis()
+    sns.heatmap(mean_df.pivot(index='sigma', columns='cost', values=str(value)+'499')).invert_yaxis()
     plt.title('Complexity (richness x connectance)')
+    plt.savefig('complexity.png', dpi=300, bbox_inches='tight')
     plt.show()
+
 
 
 
@@ -321,6 +333,7 @@ if(isHeatmap==0): # This block generates plots for scenarios besides the heatmap
             plt.ylabel('Proportion of consumer-resource')
         if(name=='propC'):
             plt.ylabel('Proportion of competition')
+        plt.savefig(name+'.png', dpi=300, bbox_inches='tight')
         plt.show()
     ########################################################################
     
@@ -394,6 +407,7 @@ if(isHeatmap==0): # This block generates plots for scenarios besides the heatmap
             plt.ylabel('Consumer-resource per species')
         plt.xlabel('Assembly event')
         #plt.legend(prop={'size': 6})
+        plt.savefig(name+'.png', dpi=300, bbox_inches='tight')
         plt.show()
     
     plt.figure(figsize=(4,4))   
@@ -408,6 +422,7 @@ if(isHeatmap==0): # This block generates plots for scenarios besides the heatmap
     #plt.legend(prop={'size': 6})
     if(communityType==1):
         plt.legend(prop={'size': 10})
+    plt.savefig('sc.png', dpi=300, bbox_inches='tight')
     plt.show()
     
     
@@ -488,6 +503,8 @@ if(isHeatmap==0): # This block generates plots for scenarios besides the heatmap
     sns.boxplot(x='kind',y=metric,data=mdatadf,palette=palette,ax=ax, width=0.4,linewidth=1)
     plt.xlabel('Scenario')
     f.tight_layout()
+    plt.savefig('entropy.png', dpi=300, bbox_inches='tight')
+    plt.show()
     
     
     
@@ -507,3 +524,5 @@ if(isHeatmap==0): # This block generates plots for scenarios besides the heatmap
     sns.boxplot(x='kind',y=metric,data=mdatadf,palette=palette,ax=ax, width=0.4,linewidth=1)
     plt.xlabel('Scenario')
     f.tight_layout()
+    plt.savefig('mod.png', dpi=300, bbox_inches='tight')
+    plt.show()

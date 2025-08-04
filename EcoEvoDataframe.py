@@ -183,7 +183,7 @@ def SaveDF():
                 frange = [11,12,13,14,15]
                 
     if(istest==1): # isTest=1 when generating custom simulations
-        frange = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] # choose the number of samples to include in the df
+        frange = [1,2] # choose the number of samples to include in the df
         
 
     for j in frange: # These will run for all sample codes, the same as the num_sample in the Model code
@@ -296,7 +296,7 @@ def SaveDF():
 ##################################################
 
 isHeatmap=0 # This value is 1 for heatmaps and 0 for other graphics
-istest=0 # This value is 1 for custom simulations and 0 for the simulations in the figures
+istest=1 # This value is 1 for custom simulations and 0 for the simulations in the figures
 
 if(isHeatmap==0 and istest==0): # This generates the df's for the 8 scenarios (figs 2, 3, 4)
     communityType = ['1','2']
@@ -339,10 +339,10 @@ if(isHeatmap==1 and istest==0): # This generates the df's for the heatmaps
 if(istest==1): # This generates the df's for custom simulations
     
             
-    kind = 3 # This labels the type for all simulations in the dataframe that will be saved, for classification purposes among dfs
-    folder = 'analysisData_1/' # specific folder where the simulations are stored, change it accordingly
+    kind = 0 # This labels the type for all simulations in the dataframe that will be saved, for classification purposes among dfs
+    folder = 'testData_1/' # specific folder where the simulations are stored, change it accordingly
 
-    saveFolder='analysis_df_1/' # specific folder where simulations will be saved, change it accordingly
+    saveFolder='test_df_1/' # specific folder where simulations will be saved, change it accordingly
 
     print(kind,folder)
     

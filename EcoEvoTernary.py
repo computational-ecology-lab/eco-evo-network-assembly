@@ -48,16 +48,14 @@ isTest=0 # Choose one to run custom simulations
 
 
 
-tvec = [1,50,100,150,200,250,300,350,400,450,499] # List of assembly times included to read the df's
+
 df = pd.DataFrame()
 
 if(isTest==1): # This block reads custom df's, choose folders, names, and parameters accordingly
-    folder = 'analysis_df_1/t2'
-    filecodes = [[0,0],[1,0],[2,0],[3,0]]
-    num_samples=20
+    folder = 'test'
+    filecodes = [[0,0]]
+    num_samples=2
     communityType=1
-    
-    folder = 't'+str(communityType)
 
     for i in filecodes:
         path=dir_path+'/df/'+folder+'_df_1/'+str(i[0])+'-df-'+str(i[1])+'.pkl'
@@ -68,7 +66,13 @@ if(isTest==1): # This block reads custom df's, choose folders, names, and parame
             df = pd.concat([df,sollist[0]], ignore_index = True)
 
 
-        
+    df.loc[df['kind']==0,'kind']='Test 0'
+    df = df.loc[:,['kind','propC4','propP4','propM4','n_species4','Con4']]
+    df.rename(columns={'propC4': 'C', 'propP4': 'P', 'propM4': 'M'}, inplace=True)
+    dic = {'Test 0': 'blue'}
+    
+    
+     
 if(isTest==0): # This block reads df's for the 8 scenarios
 
     # This lists the types of simulations to load (numbers on the left; leave the ones on the right as 0)
@@ -87,8 +91,7 @@ if(isTest==0): # This block reads df's for the 8 scenarios
         
             df = pd.concat([df,sollist[0]], ignore_index = True)
             
-            
-            
+    
     df.loc[df['kind']==0,'kind']='T1 Evo. 5'
     df.loc[df['kind']==1,'kind']='T1 Evo. 30'
     df.loc[df['kind']==2,'kind']='T1 Inv. Rand.'
@@ -118,11 +121,12 @@ if(isTest==0): # This block reads df's for the 8 scenarios
 
 
 
-# This chooses more appropriate names for columns and chooses all names and colours
-df.rename(columns={'propC499': 'C', 'propP499': 'P', 'propM499': 'M'}, inplace=True)
-dic = {'T1 Evo. 5': 'cyan', 'T1 Evo. 30': 'lime', 'T1 Inv. Rand.': 'burlywood', 'T1 Inv. Prop.': 'magenta', 'T2 Evo. 5': 'blue', 'T2 Evo. 30': 'green', 'T2 Inv. Rand.': 'gold', 'T2 Inv. Prop.': 'red'}
-
+    # This chooses more appropriate names for columns and chooses all names and colours
+    df.rename(columns={'propC499': 'C', 'propP499': 'P', 'propM499': 'M'}, inplace=True)
+    dic = {'T1 Evo. 5': 'cyan', 'T1 Evo. 30': 'lime', 'T1 Inv. Rand.': 'burlywood', 'T1 Inv. Prop.': 'magenta', 'T2 Evo. 5': 'blue', 'T2 Evo. 30': 'green', 'T2 Inv. Rand.': 'gold', 'T2 Inv. Prop.': 'red'}
+    
    
+    
 
 # This block creates the ternary plot used in the paper
 import ternary
@@ -160,4 +164,5 @@ tax.bottom_axis_label("prop. M", fontsize=12, offset=0.1)
 
 tax.get_axes().axis('off')  
 plt.tight_layout()
+plt.savefig('ternary.png', dpi=300, bbox_inches='tight')
 plt.show()
